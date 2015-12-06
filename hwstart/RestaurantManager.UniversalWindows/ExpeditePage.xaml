@@ -28,15 +28,20 @@
         <GridView Grid.Row="1" ItemsSource="{Binding OrderItems}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" Background="Gray">
-                        <ListView ItemsSource="{Binding Items}" MinHeight="100" Background="Black">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ListView ItemsSource="{Binding Items}" MinHeight="100" Background="Black" Grid.Row="0">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Title}" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Border Background="Gray" MinHeight="100">
+                        <Border Background="Gray" MinHeight="100" Grid.Row="1">
                             <TextBlock>
                                 <Run Text="{Binding Table.Description}" FontSize="20"/>
                                 <LineBreak />
@@ -45,8 +50,8 @@
                                 <Run Text="{Binding SpecialRequests}" />
                             </TextBlock>
                         </Border>
-                        <Button Content="Delete" HorizontalAlignment="Center" FontSize="20" Background="LightGray"/>
-                    </StackPanel>
+                        <Button Content="Delete" HorizontalAlignment="Center" FontSize="20" Background="LightGray" Grid.Row="2"/>
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
