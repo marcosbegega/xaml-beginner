@@ -26,6 +26,29 @@
             <RowDefinition Height="0.10*"/>
         </Grid.RowDefinitions>
         <GridView Grid.Row="1" ItemsSource="{Binding OrderItems}">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Background="Gray">
+                        <ListView ItemsSource="{Binding Items}" MinHeight="100" Background="Black">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Border Background="Gray" MinHeight="100">
+                            <TextBlock>
+                                <Run Text="{Binding Table.Description}" FontSize="20"/>
+                                <LineBreak />
+                                <Run Text="Special Notes:" />
+                                <LineBreak />
+                                <Run Text="{Binding SpecialRequests}" />
+                            </TextBlock>
+                        </Border>
+                        <Button Content="Delete" HorizontalAlignment="Center" FontSize="20" Background="LightGray"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
         </GridView>
         <Button Content="Clear All Orders" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
     </Grid>
