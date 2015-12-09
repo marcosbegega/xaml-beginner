@@ -5,7 +5,12 @@
     xmlns:local="using:RestaurantManager.UniversalWindows"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:extensions="using:RestaurantManager.Extensions"
     mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <extensions:RightClickMessageDialogBehavior Message="Thanks to the team who developed this" Title="Credits" />
+    </i:Interaction.Behaviors>
     <Page.Resources>
         <ControlTemplate x:Key="ButtonTemplate">
             <Border CornerRadius="20" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{TemplateBinding Background}">
