@@ -142,6 +142,13 @@
       <Project>{7ea2b405-e454-4f0c-a8c3-d6bf3f814f5c}</Project>
       <Name>RestaurantManager.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestaurantManager.Extensions\RestaurantManager.Extensions.csproj">
+      <Project>{fe426582-3eec-4cdf-9059-b95174cb5475}</Project>
+      <Name>RestaurantManager.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
