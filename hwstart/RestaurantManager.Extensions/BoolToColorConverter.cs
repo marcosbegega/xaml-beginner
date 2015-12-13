@@ -12,33 +12,20 @@ namespace RestaurantManager.Extensions
 {
     public class BoolToColorConverter : DependencyObject, IValueConverter
     {
-        public string TrueColor  { get; set; }
-        public string FalseColor { get; set; }
+        public Color TrueColor  { get; set; }
+        public Color FalseColor { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             bool isExpedited = (bool)value;
 
-            var property = typeof(Colors).GetRuntimeProperty("Transparent");
-
-            try
+            if (isExpedited)
             {
-                if (isExpedited)
-                {
-                    property = typeof(Colors).GetRuntimeProperty(this.TrueColor);
-                }
-                else
-                {
-                    property = typeof(Colors).GetRuntimeProperty(this.FalseColor);
-                }
-
-                return property.GetValue(null);
+                return this.TrueColor;
             }
-            catch (NullReferenceException)
+            else
             {
-                property = typeof(Colors).GetRuntimeProperty("Transparent");
-
-                return property.GetValue(null);
+                return this.FalseColor;
             }
         }
 
@@ -46,16 +33,10 @@ namespace RestaurantManager.Extensions
         {
             bool returnValue = false;
 
-            try
+            if ((Color)value == TrueColor)
             {
-                var trueProperty = typeof(Colors).GetRuntimeProperty(this.TrueColor).GetValue(null);
-                if ((Color)value == (Color)trueProperty)
-                {
-                    returnValue = true;
-                }
+                returnValue = true;
             }
-            catch (NullReferenceException)
-            { }
 
             return returnValue;
         }
