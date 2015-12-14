@@ -13,7 +13,7 @@ namespace RestaurantManager.ViewModels
         public OrderDataViewModel()
         {
             AddToOrderCommand = new DelegateCommand<MenuItem>(AddToSelected);
-            SubmitOrderCommand = new DelegateCommand<object>(SubmitOrder);
+            SubmitOrderCommand = new DelegateCommand<string>(SubmitOrder);
         }
            
         protected override void OnDataLoaded()
@@ -66,7 +66,7 @@ namespace RestaurantManager.ViewModels
             }
         }
 
-        private void SubmitOrder(object parameter)
+        private void SubmitOrder(string parameter)
         {
             Order order = new Order();
 
@@ -79,6 +79,8 @@ namespace RestaurantManager.ViewModels
 
             order.Items = new List<MenuItem>();
             order.Items.AddRange(this.CurrentlySelectedMenuItems);
+
+            order.SpecialRequests = parameter;
 
             base.Repository.Orders.Add(order);
         }
