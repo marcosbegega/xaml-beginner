@@ -4,6 +4,7 @@ using RestaurantManager.Models;
 using System.Windows.Input;
 using ViewModels;
 using System.Linq;
+using System;
 
 namespace RestaurantManager.ViewModels
 {
@@ -72,7 +73,9 @@ namespace RestaurantManager.ViewModels
             order.Id = (from Order o in base.Repository.Orders
                         select o.Id).Max();
 
-            order.Table = base.Repository.Tables[0];
+            var random = new Random(DateTime.Now.Millisecond);
+            var tableId = random.Next(0, base.Repository.Orders.Count - 1);
+            order.Table = base.Repository.Tables[tableId];
 
             order.Items = new List<MenuItem>();
             order.Items.AddRange(this.CurrentlySelectedMenuItems);
