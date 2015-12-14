@@ -1,21 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using RestaurantManager.Models;
+using System.Windows.Input;
+using ViewModels;
 
 namespace RestaurantManager.ViewModels
 {
     public class OrderDataViewModel : ViewModel
-    {       
+    {
+        public OrderDataViewModel()
+        {
+            AddToOrderCommand = new DelegateCommand<MenuItem>(AddToSelected);
+        }
+           
         protected override void OnDataLoaded()
         {
             this.MenuItems = base.Repository.StandardMenuItems;
 
-            this.CurrentlySelectedMenuItems = new ObservableCollection<MenuItem>
-            {
-                this.MenuItems[3],
-                this.MenuItems[5]
-            };
+            this.CurrentlySelectedMenuItems = new ObservableCollection<MenuItem>();
         }
+
+        public ICommand AddToOrderCommand { get; set; }
 
         private List<MenuItem>  menuItems;
 
@@ -46,6 +51,14 @@ namespace RestaurantManager.ViewModels
 
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        private void AddToSelected(MenuItem item)
+        {
+            if (!this.CurrentlySelectedMenuItems.Contains(item))
+            {
+                this.CurrentlySelectedMenuItems.Add(item);
             }
         }
     }
