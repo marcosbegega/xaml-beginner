@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using RestaurantManager.Models;
 using System.Windows.Input;
 using ViewModels;
+using System.Linq;
 
 namespace RestaurantManager.ViewModels
 {
@@ -11,6 +12,7 @@ namespace RestaurantManager.ViewModels
         public OrderDataViewModel()
         {
             AddToOrderCommand = new DelegateCommand<MenuItem>(AddToSelected);
+            SubmitOrderCommand = new DelegateCommand<object>(SubmitOrder);
         }
            
         protected override void OnDataLoaded()
@@ -21,6 +23,7 @@ namespace RestaurantManager.ViewModels
         }
 
         public ICommand AddToOrderCommand { get; set; }
+        public ICommand SubmitOrderCommand { get; set; }
 
         private List<MenuItem>  menuItems;
 
@@ -60,6 +63,21 @@ namespace RestaurantManager.ViewModels
             {
                 this.CurrentlySelectedMenuItems.Add(item);
             }
+        }
+
+        private void SubmitOrder(object parameter)
+        {
+            Order order = new Order();
+
+            order.Id = (from Order o in base.Repository.Orders
+                        select o.Id).Max();
+
+            order.Table = base.Repository.Tables[0];
+
+            order.Items = new List<MenuItem>();
+            order.Items.AddRange(this.CurrentlySelectedMenuItems);
+
+            base.Repository.Orders.Add(order);
         }
     }
 }
