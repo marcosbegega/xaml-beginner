@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using RestaurantManager.Models;
 
-namespace RestaurantManager.Models
+namespace RestaurantManager.ViewModels
 {
-    public class ExpediteDataManager : DataManager
+    public class ExpediteDataViewModel : ViewModel
     {
         protected override void OnDataLoaded()
         {
